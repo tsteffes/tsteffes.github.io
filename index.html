@@ -1,0 +1,34 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>Classic Snake</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script type="text/javascript" src="snake.js"></script>
+	<link rel="stylesheet" type="text/css" href="snake.css"></link>
+</head>
+<body>
+	<form>
+		<div align="center">
+			Apples collected: <span id="appleCount">0</span>
+			<table id="gameTable">
+				<thead>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+			<div>
+				<input type="radio" id="slow" name="difficulty" value="175" checked="checked" /><label for="slow">Slow</label>
+				<input type="radio" id="moderate" name="difficulty" value="150" /><label for="moderate">Moderate</label>
+				<input type="radio" id="fast" name="difficulty" value="125" /><label for="fast">Fast</label>
+			</div>
+			<div>
+				<input type="radio" id="small" name="size" value="10" checked="checked" /><label for="small">Small</label>
+				<input type="radio" id="medium" name="size" value="20" /><label for="medium">Medium</label>
+				<input type="radio" id="large" name="size" value="30" /><label for="large">Large</label>
+			</div>
+			<div>
+				<span id="result"></span>
+			</div>
+		</div>
+	</form>
+</body>
+</html>

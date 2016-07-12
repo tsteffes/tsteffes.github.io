@@ -1,0 +1,33 @@
+table, tbody, td
+{
+	border: 0px solid;
+	padding: 10px;
+}
+
+.apple
+{
+	background-color: red;
+}
+
+.snake
+{
+	background-color: black;
+}
+
+.tail
+{
+	background-color: #999999;
+}
+
+table
+{
+	background-color: white;
+	border: 3px solid;
+	padding: 0px;
+	margin: 0 auto;
+}
+
+body
+{
+	font-family: Arial, Helvetica, sans-serif
+}

@@ -1,0 +1,56 @@
+table, tbody, td
+{
+	border: 1px solid;
+	padding: 10px;
+}
+
+.red
+{
+	background-color: red;
+}
+
+.blue
+{
+	background-color: black;
+}
+
+.green
+{
+	background-color: #999999;
+}
+
+.yellow
+{
+	background-color: #999999;
+}
+
+#gameTable
+{
+	background-color: white;
+	border: 3px solid;
+	padding: 0px;
+	margin: 0 auto;
+}
+
+#nextPieceTable
+{
+	background-color: white;
+	border: 3px solid;
+	padding: 0px;
+	margin: 0 auto;
+}
+
+#gameTableDiv
+{
+    display: inline-table;
+}
+
+#nextPieceDiv
+{
+    display: inline-table;
+}
+
+body
+{
+	font-family: Arial, Helvetica, sans-serif
+}

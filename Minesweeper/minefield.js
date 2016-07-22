@@ -87,6 +87,12 @@ function handleStandardClick(space)
 	{
 		return;
 	}
+    
+    // ignore click
+	if (space.flagged)
+	{
+	    return;
+	}
 	
 	// end game
 	if (space.mine)

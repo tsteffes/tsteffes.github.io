@@ -6,14 +6,17 @@
       https.get('https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=BTC,USD', (resp) => {
         let data = ''; 
         resp.on('data', (chunk) => {
-        data += chunk;
+          data += chunk;
         });
         resp.on('end', () => {
           let result = JSON.parse(data);
           if (curPrice == 0) curPrice = result.USD;
           let diff = (result.USD - curPrice).toFixed(2);
-          curPrice = result.USD;
-          console.log('Eth price: $' + result.USD.toFixed(2) + ' / ' + result.BTC + ' BTC ' + (diff > 0 ? chalk.green('+' + diff) : diff < 0 ? chalk.red(diff) : ''));
+          if (diff != 0)
+          {
+            curPrice = result.USD;
+            console.log('Eth price: $' + result.USD.toFixed(2) + ' / ' + result.BTC + ' BTC ' + (diff > 0 ? chalk.green('+' + diff) : diff < 0 ? chalk.red(diff) : ''));
+          }
         });
       }).on('error', (err) => {
         console.log('Error: ' + err.message);

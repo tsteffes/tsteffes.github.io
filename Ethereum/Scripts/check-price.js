@@ -15,10 +15,8 @@
           if (diff != 0)
           {
             curPrice = result.USD;
-            console.log('Eth price: $' + result.USD.toFixed(2) + ' / ' + result.BTC + ' BTC ' + (diff > 0 ? chalk.green('+' + diff) : diff < 0 ? chalk.red(diff) : ''));
+            console.log('Eth price: $' + result.USD.toFixed(2) + ' / ' + result.BTC.toFixed(5) + ' BTC ' + (diff > 0 ? chalk.green('+' + diff) : diff < 0 ? chalk.red(diff) : ''));
           }
         });
-      }).on('error', (err) => {
-        console.log('Error: ' + err.message);
       });
-    }, 2000);
+    }, 30000);

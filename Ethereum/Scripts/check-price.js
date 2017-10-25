@@ -1,6 +1,6 @@
     const https = require('https');
     const chalk = require('chalk');
-    let curPrice = 0;
+    let ethPrice = 0;
     setInterval(() =>
     {		
       https.get('https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=BTC,USD', (resp) => {
@@ -10,13 +10,17 @@
         });
         resp.on('end', () => {
           let result = JSON.parse(data);
-          if (curPrice == 0) curPrice = result.USD;
-          let diff = (result.USD - curPrice).toFixed(2);
-          if (diff != 0)
-          {
-            curPrice = result.USD;
-            console.log('Eth price: $' + result.USD.toFixed(2) + ' / ' + result.BTC.toFixed(5) + ' BTC ' + (diff > 0 ? chalk.green('+' + diff) : diff < 0 ? chalk.red(diff) : ''));
-          }
+          if (ethPrice == 0) ethPrice = result.USD;
+          let diff = (result.USD - ethPrice).toFixed(2);
+          ethPrice = result.USD;
+          
+          let diffString = (diff >= 0 ? chalk.green('+' + diff) : chalk.red(diff));
+          let ethString = 'ETH $' + result.USD.toFixed(2) + ' (' + diffString + ')';
+          let btcString = 'BTC $' + (result.USD / result.BTC).toFixed(2);
+          let ratioString = 'Ratio ' + result.BTC.toFixed(5);
+          
+          console.log(ethString + ' / ' + btcString + ' / ' + ratioString);
         });
+      }).on('error', (err) => {
       });
     }, 30000);

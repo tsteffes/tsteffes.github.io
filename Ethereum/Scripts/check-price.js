@@ -9,7 +9,14 @@
           data += chunk;
         });
         resp.on('end', () => {
-          let result = JSON.parse(data);
+          let result;
+          try {
+            result = JSON.parse(data);
+          }
+          catch (e) {
+            return;
+          }
+
           if (ethPrice == 0) ethPrice = result.USD;
           let diff = (result.USD - ethPrice).toFixed(2);
           ethPrice = result.USD;

@@ -1,0 +1,9 @@
+{
+  "name": "crypto-checker",
+  "version": "0.1.0",
+  "desciption": "Checks the cryptos",
+  "main": "index.js",
+  "dependencies": {
+    "chalk": "2.4.2"
+  }
+}

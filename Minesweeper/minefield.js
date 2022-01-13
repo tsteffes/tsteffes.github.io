@@ -178,7 +178,7 @@ function updateUI()
 
 	if (gameState.lose || gameState.win)
 	{
-		$("#result").html("<h1>You " + (gameState.lose ? "lose" : "win") + "!</h1>" + gameState.lose ? "" : "<h1>🏆</h1><span>" + "Press enter to play again.</span>");
+		$("#result").html("<h1>You " + (gameState.lose ? "lose" : "win") + "!</h1>" + (gameState.lose ? "" : "<h1>🏆</h1><span>") + "Press enter to play again.</span>");
 		$("body").keydown(function(e){
 			if (e.which == 13)
 			{

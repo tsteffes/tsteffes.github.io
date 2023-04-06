@@ -4,19 +4,19 @@ table, tbody, td
 	padding: 10px;
 }
 
-.apple
+.apple::before
 {
-	background-color: red;
+	content: '🍎'
 }
 
-.snake
+.snake::before
 {
-	background-color: black;
+	content: '🐍'
 }
 
-.tail
+.tail::before
 {
-	background-color: #999999;
+	content: '🟩'
 }
 
 table

@@ -80,12 +80,11 @@ function updateUI()
 
 	$("#appleCount").html(appleCount);
 
-	// clear all css
-	$("td").removeClass("apple");
-	$("td").removeClass("snake");
-	$("td").removeClass("tail");
-	$("td").setClass("empty");
+	// empty all cells
+	$("td").removeClass();
+	$("td").addClass("empty");
 
+  // add the interesting bits
 	setClass(apple, "apple");
 	setClass(snake, "snake");
 	for(var i = 0; i < snake.tail.length; i++)

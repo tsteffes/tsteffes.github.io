@@ -3,6 +3,7 @@ var density;
 var spacesRemaining = 0;
 var gameStart = false;
 var spaces = [];
+var nums = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight"];
 
 var gameState = {
 	win: false,
@@ -144,10 +145,7 @@ function updateUI()
 	$("#spacesRemaining").html(spacesRemaining);
 
 	// clear all css
-	$("td").removeClass("mine");
-	$("td").removeClass("flag");
-	$("td").removeClass("empty");
-	$("td").removeClass("default");
+	$("td").removeClass();
 
 	for (var i = 0; i < spaces.length; i++)
 	{
@@ -161,8 +159,7 @@ function updateUI()
 			}
 			else if (space.number > 0)
 			{
-				setClass(space, "default");
-				setText(space, space.number);
+				setClass(space, nums[space.number]);
 			}
 			else
 			{
@@ -193,12 +190,6 @@ function setClass(space, cls)
 {
 	var cell = $(getCell(space.location.x, space.location.y));
 	cell.addClass(cls);
-}
-
-function setText(space, text)
-{
-	var cell = $(getCell(space.location.x, space.location.y));
-	cell.html(text);
 }
 
 function getCell(x, y)

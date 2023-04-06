@@ -1,39 +1,39 @@
 table, tbody, td
 {
-	border: 0px solid;
-	padding: 1px;
+  border: 0px solid;
+  padding: 1px;
 }
 
 .apple::before
 {
-	content: '🍎';
+  content: '🍎';
 }
 
 .snake::before
 {
-	content: '🐍';
+  content: '🐍';
 }
 
 .tail::before
 {
-	content: '🟩';
+  content: '🟩';
 }
 
 .empty::before
 {
-	content: '⬜';
+  content: '⬜';
   opacity: 0.0;
 }
 
 table
 {
-	background-color: white;
-	border: 3px solid;
-	padding: 0px;
-	margin: 0 auto;
+  background-color: white;
+  border: 3px solid;
+  padding: 0px;
+  margin: 0 auto;
 }
 
 body
 {
-	font-family: Arial, Helvetica, sans-serif
+  font-family: Arial, Helvetica, sans-serif
 }

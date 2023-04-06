@@ -29,9 +29,9 @@ var piece;
 var nextPiece;
 
 var gameState = {
-	win: false,
-	lose: false,
-	level: 1
+  win: false,
+  lose: false,
+  level: 1
 };
 
 $(function(){
@@ -43,8 +43,8 @@ function initEverything()
 {
     buildTable("gameTable", gameTableHeight, gameTableWidth);
     buildTable("nextPieceTable", 6, 6);
-	initObjects();	
-	initUI();	
+  initObjects();
+  initUI();
 }
 
 // logic performed at every game tick
@@ -111,7 +111,7 @@ function rotatePiece()
 
 function initUI()
 {
-	// setClass(apple, "apple");
+  // setClass(apple, "apple");
 }
 
 function setUI(p)
@@ -137,42 +137,42 @@ function getSpace(loc)
 
 function updateUI()
 {
-	if (gameState.lose || gameState.win)
-	{
-		//$("table").remove();
-		$("#result").html("<h1>You " + (gameState.lose ? "lose" : "win") + "!</h1><span>Press enter to play again.</span>");
-		$("body").keydown(function(e){
-			if (e.which == 13)
-			{
-				$("form").submit();
-			}
-		});
-		window.clearInterval(gameInt);
-		return;
-	}
-	
-	$("#level").html(gameState.level);
-	
+  if (gameState.lose || gameState.win)
+  {
+    //$("table").remove();
+    $("#result").html("<h1>You " + (gameState.lose ? "lose" : "win") + "!</h1><span>Press enter to play again.</span>");
+    $("body").keydown(function(e){
+      if (e.which == 13)
+      {
+        $("form").submit();
+      }
+    });
+    window.clearInterval(gameInt);
+    return;
+  }
+
+  $("#level").html(gameState.level);
+
     // clear all css
-	$("#gameTable tr td").removeClass();
-    
-	for (var i = 0; i < spaces.length; i++)
-	{
-		var space = spaces[i];		
-		if (space.filled)
-		{
-		    setClass(space, space.color);
-		}
-	}
+  $("#gameTable tr td").removeClass();
+
+  for (var i = 0; i < spaces.length; i++)
+  {
+    var space = spaces[i];
+    if (space.filled)
+    {
+        setClass(space, space.color);
+    }
+  }
 }
 
 function updateGameState()
-{	
-	// if piece can't fit on board, lose!
-	//if (getMaxHeight())
-	//{
-	//	gameState.lose = true;
-	//}
+{
+  // if piece can't fit on board, lose!
+  //if (getMaxHeight())
+  //{
+  //  gameState.lose = true;
+  //}
 }
 
 function movePiece()
@@ -220,29 +220,29 @@ function createNextPiece()
 
 function setClass(obj, cls)
 {
-	var objCell = $(getCell(obj.location.x, obj.location.y));
-	objCell.addClass(cls);	
+  var objCell = $(getCell(obj.location.x, obj.location.y));
+  objCell.addClass(cls);
 }
 
 function getCell(x, y, id)
 {
     id = id || "gameTable";
     var table = document.getElementById(id);
-	var row = table.rows[y];
-	return row.cells[x];
+  var row = table.rows[y];
+  return row.cells[x];
 }
 
 function buildTable(id, height, width)
 {
     $("#" + id + " tbody").empty();
-	for(var i = 0; i < height; i++)
-	{
-	    $("#" + id + " tbody").append("<tr id='" + id + "Row_" + i + "'></tr>");
-		for (var j = 0; j < width; j++)
-		{
-		    $("#" + id + " tr:last").append("<td id='" + id + "Cell_" + i + "_" + j + "'></td>");
-		}
-	}
+  for(var i = 0; i < height; i++)
+  {
+      $("#" + id + " tbody").append("<tr id='" + id + "Row_" + i + "'></tr>");
+    for (var j = 0; j < width; j++)
+    {
+        $("#" + id + " tr:last").append("<td id='" + id + "Cell_" + i + "_" + j + "'></td>");
+    }
+  }
 }
 
 function initSpaces()
@@ -357,14 +357,14 @@ function configureTail(p)
 
 function registerEvents()
 {
-	$("body").keydown(function(e)
-	{
-	    if ([17, 18, 37, 39, 40].indexOf(e.which) > -1)
-	    {
+  $("body").keydown(function(e)
+  {
+      if ([17, 18, 37, 39, 40].indexOf(e.which) > -1)
+      {
 
-	        handleCommand(e);
-	    }
-	});
+          handleCommand(e);
+      }
+  });
 }
 
 function startGame()

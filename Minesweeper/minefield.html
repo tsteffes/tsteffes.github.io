@@ -1,32 +1,32 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-	<title>Clear the Mines</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<script type="text/javascript" src="minefield.js"></script>
-	<link rel="stylesheet" type="text/css" href="minefield.css"></link>
+  <title>Clear the Mines</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script type="text/javascript" src="minefield.js"></script>
+  <link rel="stylesheet" type="text/css" href="minefield.css"></link>
 </head>
 <body>
-	<form>
-		<div align="center">
-			<span>Spaces remaining: </span><span id="spacesRemaining"></span>
-			<table id="gameTable">
-				<thead></thead>
-				<tbody></tbody>
-			</table>
-			<div>
-				<input type="radio" id="sparse" name="density" value="15" checked="checked" /><label for="slow">Sparse</label>
-				<input type="radio" id="moderate" name="density" value="25" /><label for="moderate">Moderate</label>
-				<input type="radio" id="dense" name="density" value="35" /><label for="fast">Dense</label>
-			</div>
-			<div>
-				<input type="radio" id="small" name="size" value="10" checked="checked" /><label for="small">Small</label>
-				<input type="radio" id="medium" name="size" value="15" /><label for="medium">Medium</label>
-				<input type="radio" id="large" name="size" value="20" /><label for="large">Large</label>
-			</div>
-			<div>
-				<span id="result"></span>
-			</div>
-		</div>
-	</form>
+  <form>
+    <div align="center">
+      <span>Spaces remaining: </span><span id="spacesRemaining"></span>
+      <table id="gameTable">
+        <thead></thead>
+        <tbody></tbody>
+      </table>
+      <div>
+        <input type="radio" id="sparse" name="density" value="15" checked="checked" /><label for="slow">Sparse</label>
+        <input type="radio" id="moderate" name="density" value="25" /><label for="moderate">Moderate</label>
+        <input type="radio" id="dense" name="density" value="35" /><label for="fast">Dense</label>
+      </div>
+      <div>
+        <input type="radio" id="small" name="size" value="10" checked="checked" /><label for="small">Small</label>
+        <input type="radio" id="medium" name="size" value="15" /><label for="medium">Medium</label>
+        <input type="radio" id="large" name="size" value="20" /><label for="large">Large</label>
+      </div>
+      <div>
+        <span id="result"></span>
+      </div>
+    </div>
+  </form>
 </body>
 </html>

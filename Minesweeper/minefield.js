@@ -6,342 +6,344 @@ var spaces = [];
 var nums = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight"];
 
 var gameState = {
-	win: false,
-	lose: false
+  win: false,
+  lose: false
 };
 
 function onClick(ev)
 {
-	if (gameState.lose || gameState.win || (event.which != 1 && event.which != 3))
-	{
-		return;
-	}
+  if (gameState.lose || gameState.win || (event.which != 1 && event.which != 3))
+  {
+    return;
+  }
 
-	// get location that was clicked
-	var id = ev.target.id;
-	var loc = { x: parseInt(id.split('_')[1]), y: parseInt(id.split('_')[2]) };
-	var space = getSpace(loc);
+  // get location that was clicked
+  var id = ev.target.id;
+  var loc = { x: parseInt(id.split('_')[1]), y: parseInt(id.split('_')[2]) };
+  var space = getSpace(loc);
 
-	if (event.which == 3)
-	{
-		handleFlagClick(space);
-	}
-	else
-	{
-		handleStandardClick(space);
-	}
+  if (event.which == 3)
+  {
+    handleFlagClick(space);
+  }
+  else
+  {
+    handleStandardClick(space);
+  }
 
-	updateGameState();
-	updateUI();
+  updateGameState();
+  updateUI();
 }
 
 function updateGameState()
 {
-	var uncleared = false;
+  var uncleared = false;
 
-	for (var i = 0; i < spaces.length; i++)
-	{
-		if (!spaces[i].cleared && !spaces[i].mine)
-		{
-			uncleared = true;
-		}
-	}
+  for (var i = 0; i < spaces.length; i++)
+  {
+    if (!spaces[i].cleared && !spaces[i].mine)
+    {
+      uncleared = true;
+    }
+  }
 
-	if (!uncleared)
-	{
-		gameState.win = true;
-	}
+  if (!uncleared)
+  {
+    gameState.win = true;
+  }
 }
 
 function initEverything()
 {
-	buildTable();
-	initObjects();
-	registerEvents();
+  buildTable();
+  initObjects();
+  registerEvents();
 }
 
 function getSpace(loc)
 {
-	for (var i = 0; i < spaces.length; i++)
-	{
-		if (spaces[i].location.x == loc.x && spaces[i].location.y == loc.y)
-		{
-			return spaces[i];
-		}
-	}
+  for (var i = 0; i < spaces.length; i++)
+  {
+    if (spaces[i].location.x == loc.x && spaces[i].location.y == loc.y)
+    {
+      return spaces[i];
+    }
+  }
 }
 
 function handleFlagClick(space)
 {
-	if (space.cleared)
-	{
-		return;
-	}
+  if (space.cleared)
+  {
+    return;
+  }
 
-	space.flagged = !space.flagged;
+  space.flagged = !space.flagged;
 }
 
 function handleStandardClick(space)
 {
-	// ignore click
-	if (space.cleared)
-	{
-		return;
-	}
+  // ignore click
+  if (space.cleared)
+  {
+    return;
+  }
 
     // ignore click
-	if (space.flagged)
-	{
-	    return;
-	}
+  if (space.flagged)
+  {
+      return;
+  }
 
-	// end game
-	if (space.mine)
-	{
-		space.cleared = true;
-		gameState.lose = true;
-		return;
-	}
+  // end game
+  if (space.mine)
+  {
+    space.cleared = true;
+    gameState.lose = true;
+    return;
+  }
 
-	if (space.number > 0)
-	{
-		space.cleared = true;
-		return;
-	}
+  if (space.number > 0)
+  {
+    space.cleared = true;
+    return;
+  }
 
-	// else it is an empty space
-	sweep(space);
+  // else it is an empty space
+  sweep(space);
 }
 
 function sweep(space)
 {
-	if (space.cleared || space.mine)
-	{
-		return;
-	}
+  if (space.cleared || space.mine)
+  {
+    return;
+  }
 
-	space.cleared = true;
+  space.cleared = true;
 
-	if (space.number == 0)
-	{
-		for (var i = space.location.y - 1; i <= space.location.y + 1; i++)
-		{
-			for (var j = space.location.x - 1; j <= space.location.x + 1; j++)
-			{
-				if (i < 0 || i >= size || j < 0 || j >= size || (i == space.location.y && j == space.location.x))
-				{
-					continue;
-				}
+  if (space.number == 0)
+  {
+    for (var i = space.location.y - 1; i <= space.location.y + 1; i++)
+    {
+      for (var j = space.location.x - 1; j <= space.location.x + 1; j++)
+      {
+        if (i < 0 || i >= size || j < 0 || j >= size || (i == space.location.y && j == space.location.x))
+        {
+          continue;
+        }
 
-				var nextSpace = getSpace({ x: j, y: i });
-				sweep(nextSpace);
-			}
-		}
-	}
+        var nextSpace = getSpace({ x: j, y: i });
+        sweep(nextSpace);
+      }
+    }
+  }
 }
 
 function updateUI()
 {
-	$("#spacesRemaining").html(spacesRemaining);
+  $("#spacesRemaining").html(spacesRemaining);
 
-	// clear all css
-	$("td").removeClass();
+  // clear all css
+  $("td").removeClass();
+  $("td").addClass("default");
 
-	for (var i = 0; i < spaces.length; i++)
-	{
-		var space = spaces[i];
+  for (var i = 0; i < spaces.length; i++)
+  {
+    var space = spaces[i];
 
-		if (space.cleared)
-		{
-			if (space.mine)
-			{
-				setClass(space, "mine");
-			}
-			else if (space.number > 0)
-			{
-				setClass(space, nums[space.number]);
-			}
-			else
-			{
-				setClass(space, "empty");
-			}
-		}
+    if (space.cleared)
+    {
+      if (space.mine)
+      {
+        setClass(space, "mine");
+      }
+      else if (space.number > 0)
+      {
+        setClass(space, nums[space.number]);
+      }
+      else
+      {
+        setClass(space, "empty");
+      }
+    }
 
-		if (space.flagged)
-		{
-			setClass(space, "flag");
-		}
-	}
+    if (space.flagged)
+    {
+      setClass(space, "flag");
+    }
+  }
 
-	if (gameState.lose || gameState.win)
-	{
-		$("#result").html("<h1>You " + (gameState.lose ? "lose" : "win") + "!</h1>" + (gameState.lose ? "" : "<h1>🏆</h1><span>") + "Press enter to play again.</span>");
-		$("body").keydown(function(e){
-			if (e.which == 13)
-			{
-				$("form").submit();
-			}
-		});
-		return;
-	}
+  if (gameState.lose || gameState.win)
+  {
+    $("#result").html("<h1>You " + (gameState.lose ? "lose" : "win") + "!</h1>" + (gameState.lose ? "" : "<h1>🏆</h1><span>") + "Press enter to play again.</span>");
+    $("body").keydown(function(e){
+      if (e.which == 13)
+      {
+        $("form").submit();
+      }
+    });
+    return;
+  }
 }
 
 function setClass(space, cls)
 {
-	var cell = $(getCell(space.location.x, space.location.y));
-	cell.addClass(cls);
+  var cell = $(getCell(space.location.x, space.location.y));
+  cell.removeClass();
+  cell.addClass(cls);
 }
 
 function getCell(x, y)
 {
-	var table = document.getElementById("gameTable");
-	var row = table.rows[y];
-	return row.cells[x];
+  var table = document.getElementById("gameTable");
+  var row = table.rows[y];
+  return row.cells[x];
 }
 
 function getBorderingMineCount(space)
 {
-	var tot = 0;
-	for (var i = space.location.y - 1; i <= space.location.y + 1; i++)
-	{
-		for (var j = space.location.x - 1; j <= space.location.x + 1; j++)
-		{
-			if (i < 0 || i >= size || j < 0 || j >= size)
-			{
-				continue;
-			}
+  var tot = 0;
+  for (var i = space.location.y - 1; i <= space.location.y + 1; i++)
+  {
+    for (var j = space.location.x - 1; j <= space.location.x + 1; j++)
+    {
+      if (i < 0 || i >= size || j < 0 || j >= size)
+      {
+        continue;
+      }
 
-			tot += getSpace({ x: j, y: i }).mine ? 1 : 0;
-		}
-	}
+      tot += getSpace({ x: j, y: i }).mine ? 1 : 0;
+    }
+  }
 
-	return tot;
+  return tot;
 }
 
 function randomizeLocation(obj, excluded)
 {
-	var loc;
-	var repeat;
+  var loc;
+  var repeat;
 
-	do{
-		repeat = false;
-		loc = getRandomLocation(size);
-		if (excluded && excluded.length)
-		{
-			for (var i = 0; i < excluded.length; i++)
-			{
-				if (excluded[i].location.x == loc.x && excluded[i].location.y == loc.y)
-				{
-					repeat = true;
-					break;
-				}
-			}
-		}
-	}while (repeat);
+  do{
+    repeat = false;
+    loc = getRandomLocation(size);
+    if (excluded && excluded.length)
+    {
+      for (var i = 0; i < excluded.length; i++)
+      {
+        if (excluded[i].location.x == loc.x && excluded[i].location.y == loc.y)
+        {
+          repeat = true;
+          break;
+        }
+      }
+    }
+  }while (repeat);
 
-	obj.location = $.extend({}, loc);
+  obj.location = $.extend({}, loc);
 }
 
 function getRandomLocation(max)
 {
-	return {
-		x: Math.floor(Math.random() * max),
-		y: Math.floor(Math.random() * max)
-	};
+  return {
+    x: Math.floor(Math.random() * max),
+    y: Math.floor(Math.random() * max)
+  };
 }
 
 function buildTable()
 {
-	$("#gameTable tbody").empty();
+  $("#gameTable tbody").empty();
 
-	// build the table
-	for(var i = 0; i < size; i++)
-	{
-		$("#gameTable tbody").append("<tr></tr>");
+  // build the table
+  for(var i = 0; i < size; i++)
+  {
+    $("#gameTable tbody").append("<tr></tr>");
 
-		for (var j = 0; j < size; j++)
-		{
-			$("#gameTable tr:last").append("<td id='gameTableCell_" + j + "_" + i + "'></td>");
-		}
-	}
+    for (var j = 0; j < size; j++)
+    {
+      $("#gameTable tr:last").append("<td id='gameTableCell_" + j + "_" + i + "'></td>");
+    }
+  }
 }
 
 function initObjects()
 {
-	initSpaces();
-	initMines();
-	initNumbers();
+  initSpaces();
+  initMines();
+  initNumbers();
 }
 
 function initSpaces()
 {
-	for(var i = 0; i < size; i++)
-	{
-		for (var j = 0; j < size; j++)
-		{
-			spaces.push({ location: { x: j, y: i }, mine: false, flag: false, number: 0, cleared: false });
-		}
-	}
+  for(var i = 0; i < size; i++)
+  {
+    for (var j = 0; j < size; j++)
+    {
+      spaces.push({ location: { x: j, y: i }, mine: false, flag: false, number: 0, cleared: false });
+    }
+  }
 }
 
 function initNumbers()
 {
-	for(var i = 0; i < spaces.length; i++)
-	{
-		if (spaces[i].mine == false)
-		{
-			spaces[i].number = getBorderingMineCount(spaces[i]);
-		}
-	}
+  for(var i = 0; i < spaces.length; i++)
+  {
+    if (spaces[i].mine == false)
+    {
+      spaces[i].number = getBorderingMineCount(spaces[i]);
+    }
+  }
 }
 
 function initMines()
 {
-	var mineCount = Math.floor(.01 * density * size * size);
-	var mines = [];
-	for (var i = 0; i < mineCount; i++)
-	{
-		var mine = {};
-		randomizeLocation(mine, mines);
-		mines.push(mine);
-		var space = getSpace(mine.location);
-		space.mine = true;
-	}
+  var mineCount = Math.floor(.01 * density * size * size);
+  var mines = [];
+  for (var i = 0; i < mineCount; i++)
+  {
+    var mine = {};
+    randomizeLocation(mine, mines);
+    mines.push(mine);
+    var space = getSpace(mine.location);
+    space.mine = true;
+  }
 }
 
 function updateSettings()
 {
-	var newDensity = $("input[name='density']:checked").val();
-	var newSize = $("input[name='size']:checked").val();
-	if (newSize != size || density != newDensity)
-	{
-		density = newDensity;
-		size = newSize;
-		initEverything();
-		updateUI();
-	}
+  var newDensity = $("input[name='density']:checked").val();
+  var newSize = $("input[name='size']:checked").val();
+  if (newSize != size || density != newDensity)
+  {
+    density = newDensity;
+    size = newSize;
+    initEverything();
+    updateUI();
+  }
 }
 
 function registerEvents()
 {
-	$("#gameTable tr td").mousedown(function(e)
-	{
-		if (!gameStart)
-		{
-			gameStart = true;
+  $("#gameTable tr td").mousedown(function(e)
+  {
+    if (!gameStart)
+    {
+      gameStart = true;
 
-			$("input[name='density']").first().parent().remove();
-			$("input[name='size']").first().parent().remove();
-			window.clearInterval(settingsInt);
-		}
+      $("input[name='density']").first().parent().remove();
+      $("input[name='size']").first().parent().remove();
+      window.clearInterval(settingsInt);
+    }
 
-		onClick(e);
-	});
+    onClick(e);
+  });
 
-	$("body").contextmenu(function(e)
-	{
-		return false;
-	});
+  $("body").contextmenu(function(e)
+  {
+    return false;
+  });
 }
 
 var settingsInt = setInterval(updateSettings, 50);

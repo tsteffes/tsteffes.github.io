@@ -34,25 +34,25 @@ $(function(){
 function initEverything()
 {
 	buildTable();
-	initObjects();	
-	initUI();	
+	initObjects();
+	initUI();
 }
 
 // logic performed at every game tick
 function onTick()
-{		
+{
 	// move da snake
 	moveSnake();
-	
+
 	// create new apple if it was eaten
 	refreshApple();
-		
+
 	// check if apple is eaten
 	checkApple();
-	
+
 	// determine if game is over
 	updateGameState();
-	
+
 	updateUI();
 }
 
@@ -77,14 +77,15 @@ function updateUI()
 		window.clearInterval(gameInt);
 		return;
 	}
-	
+
 	$("#appleCount").html(appleCount);
-	
+
 	// clear all css
 	$("td").removeClass("apple");
 	$("td").removeClass("snake");
 	$("td").removeClass("tail");
-		
+	$("td").setClass("empty");
+
 	setClass(apple, "apple");
 	setClass(snake, "snake");
 	for(var i = 0; i < snake.tail.length; i++)
@@ -123,7 +124,7 @@ function updateGameState()
 		gameState.lose = true;
 		return;
 	}
-	
+
 	// if head hits tail, game over
 	for(var i = 0; i < snake.tail.length; i++)
 	{
@@ -131,9 +132,9 @@ function updateGameState()
 		{
 			gameState.lose = true;
 			return;
-		}		
+		}
 	}
-	
+
 	// if all spaces are used by snake, win!
 	if (snake.tail.length == ((size * size) - 1))
 	{
@@ -142,16 +143,16 @@ function updateGameState()
 }
 
 function moveSnake()
-{	
+{
 	// remove last tail if apple was not eaten
 	if (snake.direction > -1 && apple.eaten == false)
 	{
-		snake.tail.splice(0, 1);		
+		snake.tail.splice(0, 1);
 	}
-	
+
 	// add head to tail
 	snake.tail.push({ location: $.extend({}, snake.location) });
-	
+
 	// find new direction
 	var repeat;
 	do{
@@ -171,7 +172,7 @@ function moveSnake()
 			}
 		}
 	}while(repeat)
-	
+
 	// move head
 	switch(snake.direction){
 		case 0:
@@ -192,7 +193,8 @@ function moveSnake()
 function setClass(obj, cls)
 {
 	var objCell = $(getCell(obj.location.x, obj.location.y));
-	objCell.addClass(cls);	
+	objCell.addClass(cls);
+	objCell.removeClass("empty");
 }
 
 function getCell(x, y)
@@ -206,12 +208,12 @@ function randomizeLocation(obj, excluded)
 {
 	var loc;
 	var repeat;
-	
+
 	do{
 		repeat = false;
 		loc = getRandomLocation(size);
 		if (excluded && excluded.length)
-		{			
+		{
 			for (var i = 0; i < excluded.length; i++)
 			{
 				if (excluded[i].location.x == loc.x && excluded[i].location.y == loc.y)
@@ -222,13 +224,13 @@ function randomizeLocation(obj, excluded)
 			}
 		}
 	}while (repeat);
-	
+
 	obj.location = $.extend({}, loc);
 }
 
 function getRandomLocation(max)
 {
-	return { 
+	return {
 		x: Math.floor(Math.random() * max),
 		y: Math.floor(Math.random() * max)
 	};
@@ -237,12 +239,12 @@ function getRandomLocation(max)
 function buildTable()
 {
 	$("#gameTable tbody").empty();
-		
+
 	// build the table
 	for(var i = 0; i < size; i++)
 	{
 		$("#gameTable tbody").append("<tr id='gameTableRow_" + i + "'></tr>");
-		
+
 		for (var j = 0; j < size; j++)
 		{
 			$("#gameTable tr:last").append("<td id='gameTableCell_" + i + "_" + j + "'></td>");
@@ -264,16 +266,16 @@ function updateSettings()
 		$("input[name='difficulty']").first().parent().remove();
 		$("input[name='size']").first().parent().remove();
 		window.clearInterval(settingsInt);
-		
+
 		// update game interval
 		gameInt = setInterval(onTick, tickLength);
-		
+
 		return;
 	}
-	
+
 	tickLength = $("input[name='difficulty']:checked").val();
 	var newSize = $("input[name='size']:checked").val();
-	
+
 	if (newSize != size)
 	{
 		size = newSize;

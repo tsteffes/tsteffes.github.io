@@ -1,21 +1,21 @@
-.mine
+.mine::before
 {
-	background-color: red;
+	content: '💣';
 }
 
-.flag
+.flag::before
 {
-	background-color: yellow;
+	content: '🚩';
 }
 
-.empty
+.empty::before
 {
-	background-color: #aaaaaa;
+	content: '⬜';
 }
 
-.default
+.default::before
 {
-	background-color: #dddddd;
+	content: '⬛';
 }
 
 table

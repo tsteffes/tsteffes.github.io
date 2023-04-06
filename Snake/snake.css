@@ -6,17 +6,23 @@ table, tbody, td
 
 .apple::before
 {
-	content: '🍎'
+	content: '🍎';
 }
 
 .snake::before
 {
-	content: '🐍'
+	content: '🐍';
 }
 
 .tail::before
 {
-	content: '🟩'
+	content: '🟩';
+}
+
+.empty::before
+{
+	content: '⬜';
+  opacity: 0.0;
 }
 
 table

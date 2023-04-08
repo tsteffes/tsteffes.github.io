@@ -1,27 +1,34 @@
 table, tbody, td
 {
-  border: 1px solid;
-  padding: 10px;
+  border: 0px solid;
+  font-size: 24px;
+  padding: 0px;
 }
 
-.red
+.red::before
 {
-  background-color: red;
+  content: "🟥";
 }
 
-.blue
+.blue::before
 {
-  background-color: black;
+  content: "🟦";
 }
 
-.green
+.green::before
 {
-  background-color: #999999;
+  content: "🟩";
 }
 
-.yellow
+.yellow::before
 {
-  background-color: #999999;
+  content: "🟨";
+}
+
+.empty::before
+{
+  content: "⬜";
+  opacity: 0.0;
 }
 
 #gameTable
@@ -42,15 +49,15 @@ table, tbody, td
 
 #gameTableDiv
 {
-    display: inline-table;
+  display: inline-table;
 }
 
 #nextPieceDiv
 {
-    display: inline-table;
+  display: inline-table;
 }
 
 body
 {
-  font-family: Arial, Helvetica, sans-serif
+  font-family: Arial, Helvetica, sans-serif;
 }

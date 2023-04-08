@@ -1,41 +1,45 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Tetris</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <script type="text/javascript" src="tetris.js"></script>
-    <link rel="stylesheet" type="text/css" href="tetris.css"></link>
+  <link rel="stylesheet" type="text/css" href="tetris.css"></link>
 </head>
 <body>
   <form>
     <div align="center">
-            <div style="width:300px; text-align:left; font-size:12px;">
-                <ul>
-                    <li>Left Ctrl: Rotate piece left</li>
-                    <li>Left Alt: Rotate piece right</li>
-                    <li>Down arrow: Move piece down</li>
-                    <li>Left Arrow: Move piece left</li>
-                    <li>Right Arrow: Move piece right</li>
-                </ul>
-            </div>
-            <div id="gameTableDiv">
-                <span>Current level: </span><span id="level">0</span>
-          <table id="gameTable">
-            <thead></thead>
-            <tbody></tbody>
-          </table>
-            </div>
-            <div id="nextPieceDiv">
-                <span>Next piece</span>
-                <table id="nextPieceTable">
-                    <thead></thead>
-                    <tbody></tbody>
-                </table>
-            </div>
-            <div>
-                <input type="button" value="start" onclick="startGame()" />
-            </div>
+      <div style="padding:10px;">
+        <span style="font-size: 24px">Stack the things</span>
+      </div>
+      <div id="gameTableDiv">
+        <span>Current level: </span><span id="level">0</span>
+        <table id="gameTable">
+          <thead></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div id="nextPieceDiv">
+        <span>Next piece</span>
+        <table id="nextPieceTable">
+          <thead></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div style="padding:5px">
+        <input type="button" value="start" onclick="startGame()" />
+      </div>
       <div>
         <span id="result"></span>
+      </div>
+      <div style="width:300px; text-align:left; font-size:12px;">
+        <ul>
+          <li>Left Ctrl: Rotate piece left</li>
+          <li>Left Alt: Rotate piece right</li>
+          <li>Down arrow: Move piece down</li>
+          <li>Left Arrow: Move piece left</li>
+          <li>Right Arrow: Move piece right</li>
+        </ul>
       </div>
     </div>
   </form>
